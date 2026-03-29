@@ -1058,6 +1058,7 @@
       <li><a href="#gallery">Gallery</a></li>
       <li><a href="#floorplan">Floor Plan</a></li>
       <li><a href="#location">Location</a></li>
+      <li><a href="#video-split">Video</a></li>
       <li><a href="https://calendly.com/2205-home/30min" target="_blank" class="nav-cta">Schedule Tour</a></li>
     </ul>
     <button class="nav-hamburger" id="hamburgerBtn" aria-label="Menu">
@@ -1076,6 +1077,7 @@
     <a href="#gallery" onclick="closeMobileNav()">Gallery</a>
     <a href="#floorplan" onclick="closeMobileNav()">Floor Plan</a>
     <a href="#location" onclick="closeMobileNav()">Location</a>
+    <a href="#video-split" onclick="closeMobileNav()">Video</a>
     <a href="https://calendly.com/2205-home/30min" target="_blank" class="nav-cta" onclick="closeMobileNav()">Schedule a Tour</a>
   </div>
 
@@ -1489,6 +1491,25 @@
     </div>
   </section>
 
+  <!-- ===== VIDEO (SPLIT & MERGE DEMO) ===== -->
+  <section class="section" id="video-split" style="background: var(--bg-secondary);">
+    <div class="section-inner">
+      <div class="reveal">
+        <p class="section-label">Video</p>
+        <h2 class="section-title">Property Tour</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div style="margin-bottom: 18px;">
+        <video id="chunkedVideo" controls preload="metadata" playsinline style="width:100%; max-width:900px; border:1px solid var(--border); border-radius:10px; background:#000;">
+          Your browser does not support HTML5 video.
+        </video>
+      </div>
+      <div id="videoStatus" style="margin-bottom:25px; color: var(--text-muted);">Initializing video download...</div>
+      <small id="videoInfo" style="color: var(--text-secondary);">0 / 8 chunks loaded</small>
+    </div>
+  </section>
+
   <!-- ===== CTA / BOOKING ===== -->
   <section class="cta-section" id="contact">
     <div style="position: relative; z-index: 1; max-width: 700px; margin: 0 auto;">
@@ -1795,6 +1816,99 @@
     }, { threshold: 0.12 });
 
     revealEls.forEach(el => io.observe(el));
+
+    // ============================================================
+    // SPLIT+MERGE MP4 CHUNKS (CLIENT-SIDE)
+    // ============================================================
+    const partUrls = [
+      'videos/property_tour-part-0.bin',
+      'videos/property_tour-part-1.bin',
+      'videos/property_tour-part-2.bin',
+      'videos/property_tour-part-3.bin',
+      'videos/property_tour-part-4.bin',
+      'videos/property_tour-part-5.bin',
+      'videos/property_tour-part-6.bin',
+      'videos/property_tour-part-7.bin'
+    ];
+
+    let videoBlobUrl;
+    let videoLoaded = false;
+
+    async function fetchChunksSequentially(onProgress) {
+      const buffers = [];
+      let loaded = 0;
+
+      for (const url of partUrls) {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`Failed to load ${url}: ${res.status}`);
+
+        const data = await res.arrayBuffer();
+        buffers.push(data);
+        loaded += 1;
+        onProgress?.(loaded, partUrls.length);
+      }
+
+      return buffers;
+    }
+
+    async function loadChunkedVideo() {
+      if (videoLoaded) return;
+
+      const status = document.getElementById('videoStatus');
+      const info = document.getElementById('videoInfo');
+      const video = document.getElementById('chunkedVideo');
+
+      status.textContent = 'Downloading video chunks...';
+      info.textContent = `0 / ${partUrls.length} chunks loaded`;
+
+      try {
+        let loaded = 0;
+        const progressReport = () => {
+          loaded += 1;
+          info.textContent = `${loaded} / ${partUrls.length} chunks downloaded`;
+          status.textContent = `Downloading ${loaded}/${partUrls.length}...`;
+        };
+
+        const chunkPromises = partUrls.map(async url => {
+          const res = await fetch(url);
+          if (!res.ok) throw new Error(`Failed to load ${url}: ${res.status}`);
+          const data = await res.arrayBuffer();
+          progressReport();
+          return data;
+        });
+
+        const chunkBuffers = await Promise.all(chunkPromises);
+
+        status.textContent = 'Merging chunks...';
+        const totalLength = chunkBuffers.reduce((sum, b) => sum + b.byteLength, 0);
+        const merged = new Uint8Array(totalLength);
+        let ofs = 0;
+
+        for (const buf of chunkBuffers) {
+          merged.set(new Uint8Array(buf), ofs);
+          ofs += buf.byteLength;
+        }
+
+        const blob = new Blob([merged], { type: 'video/mp4' });
+        videoBlobUrl = URL.createObjectURL(blob);
+
+        video.src = videoBlobUrl;
+        videoLoaded = true;
+        status.textContent = 'Loaded. Autoplay is disabled; press play to view.';
+        info.textContent = `Ready: ${partUrls.length} chunks merged`;
+
+        video.addEventListener('loadeddata', () => {
+          setTimeout(() => { URL.revokeObjectURL(videoBlobUrl); }, 30000);
+        }, { once: true });
+      } catch (error) {
+        console.error(error);
+        status.textContent = 'Video load failed: ' + (error.message || error);
+        info.textContent = 'Please check chunks are available in /videos/ and refresh the page.';
+      }
+    }
+
+    // Auto-load on start (no button)
+    loadChunkedVideo();
 
     // ============================================================
     // GA EVENTS — track key interactions
