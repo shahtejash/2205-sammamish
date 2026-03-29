@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2205 248th Ave SE, Sammamish WA 98075 | Luxury Off-Market Home</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏡</text></svg>" />
-  <meta name="description" content="Fully remodeled luxury home in Sammamish, WA. 4BR/3BA, pool, smart home, RV parking. Offered at $1,850,000. Off-market opportunity." />
+  <meta name="description" content="Fully remodeled luxury home in Sammamish, WA. 4BR/3BA, pool, smart home, RV parking. Off-market opportunity — contact for pricing." />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -441,6 +441,28 @@
       color: var(--accent);
       line-height: 1;
       margin-bottom: 8px;
+    }
+
+    .price-inquiry {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 4px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+
+    .price-inquiry:hover {
+      opacity: 0.82;
+      transform: translateY(-1px);
+    }
+
+    .price-inquiry-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
 
     .off-market-badge {
@@ -903,6 +925,78 @@
     }
 
     /* =============================================
+       TOUR BUTTONS (scattered throughout page)
+       ============================================= */
+    .hero-tour-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.92rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      padding: 13px 28px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 18px rgba(200,169,110,0.28);
+      text-decoration: none;
+    }
+    .hero-tour-btn:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 26px rgba(200,169,110,0.38);
+      color: #fff;
+    }
+
+    .overview-tour-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 18px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 10px 22px;
+      border-radius: 7px;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 3px 14px rgba(200,169,110,0.25);
+      text-decoration: none;
+    }
+    .overview-tour-btn:hover {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+      color: #fff;
+    }
+
+    .r4-tour-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 28px;
+      background: rgba(80,200,80,0.18);
+      border: 1.5px solid rgba(80,200,80,0.5);
+      color: #9de89d;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 11px 24px;
+      border-radius: 8px;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+      text-decoration: none;
+    }
+    .r4-tour-btn:hover {
+      background: rgba(80,200,80,0.28);
+      border-color: rgba(80,200,80,0.75);
+      transform: translateY(-2px);
+      color: #c8f5c8;
+    }
+
+    /* =============================================
        R4 ZONING BANNER
        ============================================= */
     .r4-banner {
@@ -1058,8 +1152,7 @@
       <li><a href="#gallery">Gallery</a></li>
       <li><a href="#floorplan">Floor Plan</a></li>
       <li><a href="#location">Location</a></li>
-      <li><a href="#video-split">Video</a></li>
-      <li><a href="https://calendly.com/2205-home/30min" target="_blank" class="nav-cta">Schedule Tour</a></li>
+      <li><a href="https://calendly.com/sammamish2205/30min" target="_blank" class="nav-cta">Schedule Tour</a></li>
     </ul>
     <button class="nav-hamburger" id="hamburgerBtn" aria-label="Menu">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1077,8 +1170,7 @@
     <a href="#gallery" onclick="closeMobileNav()">Gallery</a>
     <a href="#floorplan" onclick="closeMobileNav()">Floor Plan</a>
     <a href="#location" onclick="closeMobileNav()">Location</a>
-    <a href="#video-split" onclick="closeMobileNav()">Video</a>
-    <a href="https://calendly.com/2205-home/30min" target="_blank" class="nav-cta" onclick="closeMobileNav()">Schedule a Tour</a>
+    <a href="https://calendly.com/sammamish2205/30min" target="_blank" class="nav-cta" onclick="closeMobileNav()">Schedule a Tour</a>
   </div>
 
   <!-- ===== HERO ===== -->
@@ -1091,8 +1183,8 @@
       <p class="hero-sub">Fully Remodeled &nbsp;·&nbsp; Luxury Living &nbsp;·&nbsp; Move-In Ready</p>
       <div class="hero-stats">
         <div class="hero-stat">
-          <span class="hero-stat-val">$1,850,000</span>
-          <span class="hero-stat-label">Asking Price</span>
+          <a href="mailto:sammaish2205@gmail.com" class="hero-stat-val" style="font-size:0.88rem; color:var(--accent); text-decoration:none;">Contact for Price</a>
+          <span class="hero-stat-label" style="font-size:0.62rem;">sammaish2205@gmail.com</span>
         </div>
         <div class="hero-stat">
           <span class="hero-stat-val">4 BD / 3 BA</span>
@@ -1114,6 +1206,12 @@
           <span class="hero-stat-val">East</span>
           <span class="hero-stat-label">Facing</span>
         </div>
+      </div>
+      <div style="margin-top: 28px;">
+        <a href="https://calendly.com/sammamish2205/30min" target="_blank" class="hero-tour-btn">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Schedule a Private Tour
+        </a>
       </div>
     </div>
 
@@ -1152,11 +1250,18 @@
           <span class="dot-pulse"></span>
           Off-Market Property
         </div>
-        <div class="price-tag">$1,850,000</div>
+        <a href="mailto:sammaish2205@gmail.com" class="price-tag price-inquiry">
+          Contact for Pricing
+          <span class="price-inquiry-sub">sammaish2205@gmail.com</span>
+        </a>
         <div class="overview-address">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
           2205 248th Ave SE, Sammamish, WA 98075
         </div>
+        <a href="https://calendly.com/sammamish2205/30min" target="_blank" class="overview-tour-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Book a Showing
+        </a>
       </div>
       <div class="overview-stats reveal">
         <div class="stat-pill">
@@ -1436,6 +1541,10 @@
           <span class="r4-tag">Sammamish, WA</span>
           <span class="r4-tag">High-Value Location</span>
         </div>
+        <a href="https://calendly.com/sammamish2205/30min" target="_blank" class="r4-tour-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Schedule a Private Tour
+        </a>
       </div>
     </div>
   </section>
@@ -1491,25 +1600,6 @@
     </div>
   </section>
 
-  <!-- ===== VIDEO (SPLIT & MERGE DEMO) ===== -->
-  <section class="section" id="video-split" style="background: var(--bg-secondary);">
-    <div class="section-inner">
-      <div class="reveal">
-        <p class="section-label">Video</p>
-        <h2 class="section-title">Property Tour</h2>
-        <div class="section-divider"></div>
-      </div>
-
-      <div style="margin-bottom: 18px;">
-        <video id="chunkedVideo" controls preload="metadata" playsinline style="width:100%; max-width:900px; border:1px solid var(--border); border-radius:10px; background:#000;">
-          Your browser does not support HTML5 video.
-        </video>
-      </div>
-      <div id="videoStatus" style="margin-bottom:25px; color: var(--text-muted);">Initializing video download...</div>
-      <small id="videoInfo" style="color: var(--text-secondary);">0 / 8 chunks loaded</small>
-    </div>
-  </section>
-
   <!-- ===== CTA / BOOKING ===== -->
   <section class="cta-section" id="contact">
     <div style="position: relative; z-index: 1; max-width: 700px; margin: 0 auto;">
@@ -1523,11 +1613,11 @@
         Book your private showing today and discover everything this exceptional property has to offer.
       </p>
       <div class="cta-buttons">
-        <a href="https://calendly.com/2205-home/30min" target="_blank" class="btn-primary">
+        <a href="https://calendly.com/sammamish2205/30min" target="_blank" class="btn-primary">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           Book a Private Tour
         </a>
-        <a href="mailto:tejash.personal.1982@gmail.com" class="btn-secondary">
+        <a href="mailto:sammaish2205@gmail.com" class="btn-secondary">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           Send an Inquiry
         </a>
@@ -1540,7 +1630,7 @@
     <div class="footer-inner">
       <div class="footer-brand">2205 <span>Sammamish</span></div>
       <p class="footer-note">
-        2205 248th Ave SE, Sammamish, WA 98075 &nbsp;·&nbsp; Offered at $1,850,000 &nbsp;·&nbsp; 4 BD / 3 BA<br>
+        2205 248th Ave SE, Sammamish, WA 98075 &nbsp;·&nbsp; 4 BD / 3 BA &nbsp;·&nbsp; Pricing available upon inquiry<br>
         This property is being sold off-market. All information is deemed reliable but not guaranteed.
         Buyer to verify all details independently.
       </p>
@@ -1550,7 +1640,7 @@
         <a href="#gallery">Gallery</a>
         <a href="#floorplan">Floor Plan</a>
         <a href="#location">Location</a>
-        <a href="https://calendly.com/2205-home/30min" target="_blank">Schedule Tour</a>
+        <a href="https://calendly.com/sammamish2205/30min" target="_blank">Schedule Tour</a>
       </div>
       <div class="footer-copy">&copy; 2026 &nbsp;·&nbsp; 2205 248th Ave SE &nbsp;·&nbsp; All Rights Reserved</div>
     </div>
@@ -1816,99 +1906,6 @@
     }, { threshold: 0.12 });
 
     revealEls.forEach(el => io.observe(el));
-
-    // ============================================================
-    // SPLIT+MERGE MP4 CHUNKS (CLIENT-SIDE)
-    // ============================================================
-    const partUrls = [
-      'videos/property_tour-part-0.bin',
-      'videos/property_tour-part-1.bin',
-      'videos/property_tour-part-2.bin',
-      'videos/property_tour-part-3.bin',
-      'videos/property_tour-part-4.bin',
-      'videos/property_tour-part-5.bin',
-      'videos/property_tour-part-6.bin',
-      'videos/property_tour-part-7.bin'
-    ];
-
-    let videoBlobUrl;
-    let videoLoaded = false;
-
-    async function fetchChunksSequentially(onProgress) {
-      const buffers = [];
-      let loaded = 0;
-
-      for (const url of partUrls) {
-        const res = await fetch(url);
-        if (!res.ok) throw new Error(`Failed to load ${url}: ${res.status}`);
-
-        const data = await res.arrayBuffer();
-        buffers.push(data);
-        loaded += 1;
-        onProgress?.(loaded, partUrls.length);
-      }
-
-      return buffers;
-    }
-
-    async function loadChunkedVideo() {
-      if (videoLoaded) return;
-
-      const status = document.getElementById('videoStatus');
-      const info = document.getElementById('videoInfo');
-      const video = document.getElementById('chunkedVideo');
-
-      status.textContent = 'Downloading video chunks...';
-      info.textContent = `0 / ${partUrls.length} chunks loaded`;
-
-      try {
-        let loaded = 0;
-        const progressReport = () => {
-          loaded += 1;
-          info.textContent = `${loaded} / ${partUrls.length} chunks downloaded`;
-          status.textContent = `Downloading ${loaded}/${partUrls.length}...`;
-        };
-
-        const chunkPromises = partUrls.map(async url => {
-          const res = await fetch(url);
-          if (!res.ok) throw new Error(`Failed to load ${url}: ${res.status}`);
-          const data = await res.arrayBuffer();
-          progressReport();
-          return data;
-        });
-
-        const chunkBuffers = await Promise.all(chunkPromises);
-
-        status.textContent = 'Merging chunks...';
-        const totalLength = chunkBuffers.reduce((sum, b) => sum + b.byteLength, 0);
-        const merged = new Uint8Array(totalLength);
-        let ofs = 0;
-
-        for (const buf of chunkBuffers) {
-          merged.set(new Uint8Array(buf), ofs);
-          ofs += buf.byteLength;
-        }
-
-        const blob = new Blob([merged], { type: 'video/mp4' });
-        videoBlobUrl = URL.createObjectURL(blob);
-
-        video.src = videoBlobUrl;
-        videoLoaded = true;
-        status.textContent = 'Loaded. Autoplay is disabled; press play to view.';
-        info.textContent = `Ready: ${partUrls.length} chunks merged`;
-
-        video.addEventListener('loadeddata', () => {
-          setTimeout(() => { URL.revokeObjectURL(videoBlobUrl); }, 30000);
-        }, { once: true });
-      } catch (error) {
-        console.error(error);
-        status.textContent = 'Video load failed: ' + (error.message || error);
-        info.textContent = 'Please check chunks are available in /videos/ and refresh the page.';
-      }
-    }
-
-    // Auto-load on start (no button)
-    loadChunkedVideo();
 
     // ============================================================
     // GA EVENTS — track key interactions
