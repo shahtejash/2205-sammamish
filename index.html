@@ -925,6 +925,58 @@
     }
 
     /* =============================================
+       VIDEO SECTION (YouTube embed)
+       ============================================= */
+    .video-section {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .video-desc {
+      font-size: 0.97rem;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    .yt-wrap {
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+
+    /* Gold accent bar along top */
+    .yt-wrap::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Responsive 16:9 iframe */
+    .yt-player {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 */
+      height: 0;
+      background: #000;
+    }
+
+    .yt-player iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* =============================================
        TOUR BUTTONS (scattered throughout page)
        ============================================= */
     .hero-tour-btn {
@@ -1148,6 +1200,7 @@
     <div class="nav-brand">2205 <span>Sammamish</span></div>
     <ul class="nav-links">
       <li><a href="#highlights">Highlights</a></li>
+      <li><a href="#tour-video">Video Tour</a></li>
       <li><a href="#features">Features</a></li>
       <li><a href="#gallery">Gallery</a></li>
       <li><a href="#floorplan">Floor Plan</a></li>
@@ -1166,6 +1219,7 @@
   <!-- Mobile Nav -->
   <div class="nav-mobile" id="mobileNav">
     <a href="#highlights" onclick="closeMobileNav()">Highlights</a>
+    <a href="#tour-video" onclick="closeMobileNav()">Video Tour</a>
     <a href="#features" onclick="closeMobileNav()">Features</a>
     <a href="#gallery" onclick="closeMobileNav()">Gallery</a>
     <a href="#floorplan" onclick="closeMobileNav()">Floor Plan</a>
@@ -1366,6 +1420,30 @@
           </p>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== VIRTUAL TOUR VIDEO ===== -->
+  <section class="section video-section" id="tour-video">
+    <div class="section-inner">
+      <div class="reveal" style="text-align:center;">
+        <p class="section-label">Virtual Tour</p>
+        <h2 class="section-title">Experience the Home in Motion</h2>
+        <div class="section-divider" style="margin: 0 auto 12px;"></div>
+        <p class="video-desc">A cinematic walkthrough of every room, space, and detail — brought to life.</p>
+      </div>
+      <div class="yt-wrap reveal">
+        <div class="yt-player">
+          <iframe
+            src="https://www.youtube.com/embed/S_iQ90_xewo?rel=0&modestbranding=1&color=white"
+            title="Property Tour — 2205 248th Ave SE, Sammamish WA"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+        </div>
       </div>
     </div>
   </section>
